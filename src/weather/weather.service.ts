@@ -11,13 +11,13 @@ export class WeatherService {
     )
 
     if (!search.ok) {
-      throw new HttpException('Failed to fetch weather data', HttpStatus.BAD_GATEWAY);
+      throw new HttpException('Failed to fetch weather data', HttpStatus.NOT_FOUND);
     }
 
     const data = await search.json();
 
     if (data.error) {
-      throw new HttpException(data.error.info || 'Weather API Error', HttpStatus.BAD_REQUEST);
+      throw new HttpException(data.error.info || 'Weather API Error', HttpStatus.SERVICE_UNAVAILABLE);
     }
 
         return {
